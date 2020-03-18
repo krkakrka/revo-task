@@ -1,0 +1,38 @@
+{
+  "name": "revolut",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Karolis Lesevicius <karolis.lesevicius@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "serve": "webpack-dev-server",
+    "type-check": "tsc",
+    "type-check:watch": "yarn run type-check -- --watch",
+    "dev": "concurrently \"yarn run serve\" \"yarn run type-check:watch\" \"yarn run test:watch\"",
+    "bundle": "webpack"
+  },
+  "dependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/preset-typescript": "^7.8.3",
+    "@testing-library/react": "^10.0.1",
+    "@types/jest": "^25.1.4",
+    "@types/react": "^16.9.23",
+    "@types/react-dom": "^16.9.5",
+    "babel-loader": "^8.0.6",
+    "concurrently": "^5.1.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "jest": "^25.1.0",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
