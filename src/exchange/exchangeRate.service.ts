@@ -1,4 +1,4 @@
-import { store } from './store/store';
+import { store } from '../store/store';
 
 const BASE_EUR_RATES_URL = 'https://api.exchangeratesapi.io/latest?base=EUR&symbols=USD,GBP';
 // todo fix

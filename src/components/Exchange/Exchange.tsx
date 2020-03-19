@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { CurrencyInput, ExchangeRate } from '..';
-import { Currency } from '../../currency.types';
-import { CURRENCIES, CURRENCY_IDS } from '../../constants';
+import { Currency } from '../../exchange/currency.types';
+import { CURRENCIES, CURRENCY_IDS } from '../../exchange/constants';
 
 export interface ExchangeProps {
   // todo any

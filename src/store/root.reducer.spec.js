@@ -1,5 +1,5 @@
 import { rootReducer } from './root.reducer';
-import { INITIAL_STATE } from '../constants';
+import { INITIAL_STATE } from '../exchange/constants';
 
 describe('exchangeReducer', () => {
   let state;

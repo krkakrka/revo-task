@@ -1,6 +1,6 @@
 import React from "react";
-import { Currency } from '../../currency.types';
-import { getFormatFunc } from '../../currency.utils';
+import { Currency } from '../../exchange/currency.types';
+import { getFormatFunc } from '../../exchange/currency.utils';
 import styles from './ExchangeRate.css';
 
 export interface ExchangeRateProps {

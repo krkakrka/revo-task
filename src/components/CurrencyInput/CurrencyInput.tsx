@@ -1,5 +1,5 @@
 import React from "react";
-import { Currency } from '../../currency.types';
+import { Currency } from '../../exchange/currency.types';
 import styles from './CurrencyInput.css';
 
 function isInputValid(input: string) {

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 
 import { Exchange } from './components';
 import { store } from './store/store';
-import { setupRatesPolling } from './exchangeRate.service';
+import { setupRatesPolling } from './exchange/exchangeRate.service';
 
 setupRatesPolling();
 

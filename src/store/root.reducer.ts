@@ -1,4 +1,4 @@
-import { INITIAL_STATE } from '../constants';
+import { INITIAL_STATE } from '../exchange/constants';
 import { exchangeReducer } from './exchange.reducer';
 
 export function rootReducer(state = INITIAL_STATE, action) {

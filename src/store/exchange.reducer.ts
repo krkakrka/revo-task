@@ -1,4 +1,4 @@
-import { min } from '../currency.utils';
+import { min } from '../exchange/currency.utils';
 
 function exchangeFromTo(exchangeState, ratesState, fromValue): number {
   const pair = exchangeState.from.currency + exchangeState.to.currency;
