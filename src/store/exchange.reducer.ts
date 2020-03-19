@@ -1,4 +1,4 @@
-import { min } from './currency.utils';
+import { min } from '../currency.utils';
 
 function exchangeToCurrencyPair(exchangeState) {
   return exchangeState.from.currency + exchangeState.to.currency;
@@ -53,12 +53,12 @@ function changeToCurrencyAndRecalc(exchangeState, ratesState, action) {
   const value = exchangeState.to.value * ratesState[pair];
   return {
     from: {
-      ...exchangeState.from,
-      value
+      ...exchangeState.from
     },
     to: {
       ...exchangeState.to,
-      currency: action.payload.currencyId
+      currency: action.payload.currencyId,
+      value
     }
   };
 }

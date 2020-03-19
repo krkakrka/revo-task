@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { INITIAL_STATE } from './constants';
+import { INITIAL_STATE } from '../constants';
 import { exchangeReducer } from './exchange.reducer';
 
 function exchange(state = INITIAL_STATE, action) {
