@@ -1,17 +1,13 @@
 import { min } from '../currency.utils';
 
-function exchangeToCurrencyPair(exchangeState) {
-  return exchangeState.from.currency + exchangeState.to.currency;
-}
-
 function exchangeFromTo(exchangeState, ratesState, fromValue): number {
-  const pair = exchangeToCurrencyPair(exchangeState);
+  const pair = exchangeState.from.currency + exchangeState.to.currency;
   const toValue = fromValue * ratesState[pair];
   return toValue;
 }
 
 function exchangeToFrom(exchangeState, ratesState, toValue): number {
-  const pair = exchangeToCurrencyPair(exchangeState);
+  const pair = exchangeState.to.currency + exchangeState.from.currency;;
   const fromValue = toValue * ratesState[pair];
   return fromValue;
 }
