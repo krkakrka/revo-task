@@ -4,6 +4,11 @@ import { exchangeReducer } from './exchange.reducer';
 
 function exchange(state = INITIAL_STATE, action) {
   switch(action.type) {
+    case 'RATES_UPDATE':
+      return {
+        ...state,
+        rates: action.payload.rates
+      };
     default:
       return {
         ...state,
