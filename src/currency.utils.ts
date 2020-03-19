@@ -24,3 +24,7 @@ export function getFormatFunc(currency: Currency) {
   const formatFunc = CURRENCY_TO_FORMAT[currency.id];
   return formatFunc || CURRENCY_TO_FORMAT['default'];
 }
+
+export function min(value: number, minimal: number): number {
+  return value < minimal ? minimal : value;
+}

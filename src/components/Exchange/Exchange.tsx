@@ -22,7 +22,7 @@ function Exchange(props: ExchangeProps) {
     onToCurrencyChange
   } = props;
   const baseCurrency = CURRENCIES[exchange.from.currency];
-  const targetCurrency = CURRENCIES[exchange.from.currency];
+  const targetCurrency = CURRENCIES[exchange.to.currency];
   const pair = baseCurrency.id + targetCurrency.id;
   const rate = rates[pair];
 
