@@ -24,15 +24,11 @@ export const CURRENCIES = {
 
 export const INITIAL_STATE = {
   balances: {
-    [CURRENCY_IDS.EUR]: 0.00,
-    [CURRENCY_IDS.USD]: 0.00,
-    [CURRENCY_IDS.GBP]: 0.00,
+    [CURRENCY_IDS.EUR]: 30.00,
+    [CURRENCY_IDS.USD]: 30.00,
+    [CURRENCY_IDS.GBP]: 30.00,
   },
-  // todo event to update these
   rates: {
-    // https://api.exchangeratesapi.io/latest?base=EUR
-    // https://api.exchangeratesapi.io/latest?base=USD (needed for GBP, all else can be derived)
-    // todo need function to get reversed rates (or generate them on state, but that's duplicate state. derived state, so fine)
     EURUSD: 1,
     USDEUR: 1,
     EURGBP: 1,

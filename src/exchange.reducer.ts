@@ -42,6 +42,18 @@ export function exchangeReducer(exchangeState, ratesState, action) {
           value: toValue
         }
       };
+    case 'EXCHANGE': {
+      return {
+        from: {
+          ...exchangeState.from,
+          value: 0
+        },
+        to: {
+          ...exchangeState.to,
+          value: 0
+        },
+      };
+    }
     default:
       return exchangeState;
   }

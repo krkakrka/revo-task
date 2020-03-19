@@ -19,7 +19,8 @@ function Exchange(props: ExchangeProps) {
     balances,
     rates,
     onFromCurrencyChange,
-    onToCurrencyChange
+    onToCurrencyChange,
+    onExchangeClick
   } = props;
   const baseCurrency = CURRENCIES[exchange.from.currency];
   const targetCurrency = CURRENCIES[exchange.to.currency];
@@ -45,7 +46,12 @@ function Exchange(props: ExchangeProps) {
         value={exchange.to.value}
         onChange={onToCurrencyChange}
       />
-      <button>Exchange</button>
+      <button
+        disabled={balances[baseCurrency.id] < exchange.from.value && balances[baseCurrency.id] === 0}
+        onClick={onExchangeClick}
+      >
+        Exchange
+        </button>
     </div>
   );
 };
@@ -64,7 +70,8 @@ function mapDispatchToProps(dispatch: any) {
   return {
     // todo consts/types, action creators
     onFromCurrencyChange: (value: number) => dispatch({ type: 'FROM_CURRENCY_CHANGE', payload: { value } }),
-    onToCurrencyChange: (value: number) => dispatch({ type: 'TO_CURRENCY_CHANGE', payload: { value } })
+    onToCurrencyChange: (value: number) => dispatch({ type: 'TO_CURRENCY_CHANGE', payload: { value } }),
+    onExchangeClick: () => dispatch({ type: 'EXCHANGE' })
   };
 }
 
