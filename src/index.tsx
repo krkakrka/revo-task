@@ -1,9 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from 'react-redux';
+
 import { Exchange } from './components';
-import { currencies } from './currency.constants';
+import { store } from './store';
 
 ReactDOM.render(
-  <Exchange currencies={currencies} />,
+  <Provider store={store}>
+    <Exchange />
+  </Provider>,
   document.getElementById("root")
 );

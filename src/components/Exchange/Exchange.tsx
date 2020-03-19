@@ -1,24 +1,74 @@
 import React from "react";
+import { connect } from 'react-redux';
 import { CurrencyInput, ExchangeRate } from '..';
 import { Currency } from '../../currency.types';
+import { CURRENCIES, CURRENCY_IDS } from '../../constants';
 
 export interface ExchangeProps {
-  currencies: {
-    [propName: string]: Currency
-  }
+  // todo any
+  exchange: any,
+  balances: any,
+  rates: any,
+  onFromCurrencyChange: any,
+  onToCurrencyChange: any
 }
 
-export function Exchange(props: ExchangeProps) {
-  const { currencies } = props;
-  const [baseCurrency, setBaseCurrency] = React.useState(currencies.eur);
-  const [targetCurrency, setTargetCurrency] = React.useState(currencies.usd);
+function Exchange(props: ExchangeProps) {
+  const {
+    exchange,
+    balances,
+    rates,
+    onFromCurrencyChange,
+    onToCurrencyChange
+  } = props;
+  const baseCurrency = CURRENCIES[exchange.from.currency];
+  const targetCurrency = CURRENCIES[exchange.from.currency];
+  const pair = baseCurrency.id + targetCurrency.id;
+  const rate = rates[pair];
 
   return (
     <div>
-      <CurrencyInput currency={baseCurrency} balance={1234} value={0} onChange={console.log} />
-      <ExchangeRate base={baseCurrency} target={targetCurrency} rate={1.2} />
-      <CurrencyInput currency={targetCurrency} balance={234} value={1234} onChange={console.log} />
+      <CurrencyInput
+        currency={baseCurrency}
+        balance={balances[baseCurrency.id]}
+        value={exchange.from.value}
+        onChange={onFromCurrencyChange}
+      />
+      <ExchangeRate
+        base={baseCurrency}
+        target={targetCurrency}
+        rate={rate}
+      />
+      <CurrencyInput
+        currency={targetCurrency}
+        balance={balances[targetCurrency.id]}
+        value={exchange.to.value}
+        onChange={onToCurrencyChange}
+      />
       <button>Exchange</button>
     </div>
   );
 };
+
+// todo any
+function mapStateToProps(state: any) {
+  return {
+    balances: state.balances,
+    exchange: state.exchange,
+    rates: state.rates
+  };
+}
+
+// todo any
+function mapDispatchToProps(dispatch: any) {
+  return {
+    // todo consts/types, action creators
+    onFromCurrencyChange: (value: number) => dispatch({ type: 'FROM_CURRENCY_CHANGE', payload: { value } }),
+    onToCurrencyChange: (value: number) => dispatch({ type: 'TO_CURRENCY_CHANGE', payload: { value } })
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Exchange);

@@ -1,5 +1,6 @@
 import React from "react";
 import { Currency } from '../../currency.types';
+import { getFormatFunc } from '../../currency.utils';
 import styles from './ExchangeRate.css';
 
 export interface ExchangeRateProps {
@@ -10,9 +11,12 @@ export interface ExchangeRateProps {
 
 export function ExchangeRate(props: ExchangeRateProps) {
   const { base, target, rate } = props;
+  const baseFormatFunc = getFormatFunc(base);
+  const targetFormatFunc = getFormatFunc(target);
+
   return (
     <div className={styles.container}>
-      {`${base.format(1)} = ${target.format(rate)}`}
+      {`${baseFormatFunc(1)} = ${targetFormatFunc(rate)}`}
     </div>
   );
 }

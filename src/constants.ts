@@ -1,0 +1,53 @@
+export enum CURRENCY_IDS {
+  EUR = 'EUR',
+  USD = 'USD',
+  GBP = 'GBP'
+};
+
+export const CURRENCIES = {
+  [CURRENCY_IDS.EUR]: {
+    id: CURRENCY_IDS.EUR,
+    label: 'EUR',
+    symbol: '€',
+  },
+  [CURRENCY_IDS.USD]: {
+    id: CURRENCY_IDS.USD,
+    label: 'USD',
+    symbol: '$',
+  },
+  [CURRENCY_IDS.GBP]: {
+    id: CURRENCY_IDS.GBP,
+    label: 'GBP',
+    symbol: '£',
+  }
+};
+
+export const INITIAL_STATE = {
+  balances: {
+    [CURRENCY_IDS.EUR]: 0.00,
+    [CURRENCY_IDS.USD]: 0.00,
+    [CURRENCY_IDS.GBP]: 0.00,
+  },
+  // todo event to update these
+  rates: {
+    // https://api.exchangeratesapi.io/latest?base=EUR
+    // https://api.exchangeratesapi.io/latest?base=USD (needed for GBP, all else can be derived)
+    // todo need function to get reversed rates (or generate them on state, but that's duplicate state. derived state, so fine)
+    EURUSD: 1,
+    USDEUR: 1,
+    EURGBP: 1,
+    GBPEUR: 1,
+    USDGBP: 1,
+    GBPUSD: 1,
+  },
+  exchange: {
+    from: {
+      currency: CURRENCY_IDS.EUR,
+      value: 0
+    },
+    to: {
+      currency: CURRENCY_IDS.USD,
+      value: 0
+    }
+  }
+};
