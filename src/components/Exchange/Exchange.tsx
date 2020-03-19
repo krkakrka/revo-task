@@ -18,9 +18,11 @@ function Exchange(props: ExchangeProps) {
     exchange,
     balances,
     rates,
-    onFromCurrencyChange,
-    onToCurrencyChange,
-    onExchangeClick
+    onFromCurrencyValueChange,
+    onToCurrencyValueChange,
+    onExchangeClick,
+    onFromCurrencyIdChange,
+    onToCurrencyIdChange
   } = props;
   const baseCurrency = CURRENCIES[exchange.from.currency];
   const targetCurrency = CURRENCIES[exchange.to.currency];
@@ -33,7 +35,8 @@ function Exchange(props: ExchangeProps) {
         currency={baseCurrency}
         balance={balances[baseCurrency.id]}
         value={exchange.from.value}
-        onChange={onFromCurrencyChange}
+        onChange={onFromCurrencyValueChange}
+        onCurrencyChange={onFromCurrencyIdChange}
       />
       <ExchangeRate
         base={baseCurrency}
@@ -44,7 +47,8 @@ function Exchange(props: ExchangeProps) {
         currency={targetCurrency}
         balance={balances[targetCurrency.id]}
         value={exchange.to.value}
-        onChange={onToCurrencyChange}
+        onChange={onToCurrencyValueChange}
+        onCurrencyChange={onToCurrencyIdChange}
       />
       <button
         disabled={balances[baseCurrency.id] < exchange.from.value && balances[baseCurrency.id] === 0}
@@ -69,9 +73,11 @@ function mapStateToProps(state: any) {
 function mapDispatchToProps(dispatch: any) {
   return {
     // todo consts/types, action creators
-    onFromCurrencyChange: (value: number) => dispatch({ type: 'FROM_CURRENCY_CHANGE', payload: { value } }),
-    onToCurrencyChange: (value: number) => dispatch({ type: 'TO_CURRENCY_CHANGE', payload: { value } }),
-    onExchangeClick: () => dispatch({ type: 'EXCHANGE' })
+    onFromCurrencyValueChange: (value: number) => dispatch({ type: 'FROM_CURRENCY_VALUE_CHANGE', payload: { value } }),
+    onToCurrencyValueChange: (value: number) => dispatch({ type: 'TO_CURRENCY_VALUE_CHANGE', payload: { value } }),
+    onExchangeClick: () => dispatch({ type: 'EXCHANGE' }),
+    onFromCurrencyIdChange: (currencyId: CURRENCY_IDS) => dispatch({ type: 'FROM_CURRENCY_ID_CHANGE', payload: { currencyId }}),
+    onToCurrencyIdChange: (currencyId: CURRENCY_IDS) => dispatch({ type: 'TO_CURRENCY_ID_CHANGE', payload: { currencyId }})
   };
 }
 

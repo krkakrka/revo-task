@@ -15,7 +15,7 @@ export interface CurrencyInputProps {
 }
 
 export function CurrencyInput(props: CurrencyInputProps) {
-  const { currency, balance, value, onChange } = props;
+  const { currency, balance, value, onChange, onCurrencyChange } = props;
   const validateAndMaybeUpdate = (input: string) => {
     if (isInputValid(input)) {
       // todo convert to number?
@@ -26,7 +26,12 @@ export function CurrencyInput(props: CurrencyInputProps) {
   return (
     <div className={styles.container}>
       <div>
-        <div>{currency.label}</div>
+        <select value={currency.id} onChange={e => onCurrencyChange(e.target.value)}>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+          <option value="GBP">GBP</option>
+        </select>
+
         <input
           type="number"
           placeholder="0"
