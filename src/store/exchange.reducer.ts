@@ -2,19 +2,19 @@ import { min } from '../exchange/currency.utils';
 
 function exchangeFromTo(exchangeState, ratesState, fromValue): number {
   const pair = exchangeState.from.currency + exchangeState.to.currency;
-  const toValue = fromValue * ratesState[pair];
+  const toValue = Math.round(fromValue * ratesState[pair]);
   return toValue;
 }
 
 function exchangeToFrom(exchangeState, ratesState, toValue): number {
   const pair = exchangeState.to.currency + exchangeState.from.currency;;
-  const fromValue = toValue * ratesState[pair];
+  const fromValue = Math.round(toValue * ratesState[pair]);
   return fromValue;
 }
 
 function switchCurrenciesAndRecalc(exchangeState, ratesState) {
   const pair = exchangeState.to.currency + exchangeState.from.currency;
-  const toValue = exchangeState.from.value * ratesState[pair];
+  const toValue = Math.round(exchangeState.from.value * ratesState[pair]);
 
   return {
     from: {
@@ -31,7 +31,7 @@ function switchCurrenciesAndRecalc(exchangeState, ratesState) {
 
 function changeFromCurrencyAndRecalc(exchangeState, ratesState, action) {
   const pair = action.payload.currencyId + exchangeState.to.currency;
-  const value = exchangeState.to.value * ratesState[pair];
+  const value = Math.round(exchangeState.to.value * ratesState[pair]);
   return {
     from: {
       ...exchangeState.from,
@@ -46,7 +46,7 @@ function changeFromCurrencyAndRecalc(exchangeState, ratesState, action) {
 
 function changeToCurrencyAndRecalc(exchangeState, ratesState, action) {
   const pair = exchangeState.from.currency + action.payload.currencyId;
-  const value = exchangeState.to.value * ratesState[pair];
+  const value = Math.round(exchangeState.to.value * ratesState[pair]);
   return {
     from: {
       ...exchangeState.from
@@ -62,7 +62,7 @@ function changeToCurrencyAndRecalc(exchangeState, ratesState, action) {
 export function exchangeReducer(exchangeState, ratesState, action) {
   switch(action.type) {
     case 'FROM_CURRENCY_VALUE_CHANGE':
-      const fromValue = min(action.payload.value, 0);
+      const fromValue = Math.round(min(action.payload.value, 0));
       return {
         from: {
           ...exchangeState.from,
@@ -74,7 +74,7 @@ export function exchangeReducer(exchangeState, ratesState, action) {
         }
       };
     case 'TO_CURRENCY_VALUE_CHANGE':
-      const toValue = min(action.payload.value, 0);
+      const toValue = Math.round(min(action.payload.value, 0));
       return {
         from: {
           ...exchangeState.from,

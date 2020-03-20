@@ -1,10 +1,25 @@
 import React from "react";
 import { Currency } from '../../exchange/currency.types';
+import { getFormatFunc } from '../../exchange/currency.utils';
 import styles from './CurrencyInput.css';
 
-function isInputValid(input: string) {
-  //todo
-  return true;
+export function isInputValid(input: string) {
+  if (input.length === 0) return true;
+  if (!input.includes('.')) {
+    const regex = /^[0-9]+$/g;
+    return regex.test(input);
+  } else {
+    const regex = /^[0-9]+\.[0-9]{0,2}$/g;
+    return regex.test(input);
+  }
+}
+
+function fromCents(cents: number): string {
+  return String(cents / 100);
+}
+
+function toCents(textValue: string): number {
+  return Math.round(Number(textValue) * 100);
 }
 
 export interface CurrencyInputProps {
@@ -15,11 +30,16 @@ export interface CurrencyInputProps {
 }
 
 export function CurrencyInput(props: CurrencyInputProps) {
-  const { currency, balance, value, onChange, onCurrencyChange } = props;
-  const validateAndMaybeUpdate = (input: string) => {
-    if (isInputValid(input)) {
-      // todo convert to number?
-      onChange(Number(input));
+  const { currency, balance, value: storeValue, onChange, onCurrencyChange } = props;
+  const currencyFormatFunc = getFormatFunc(currency);
+  const [textValue, setTextValue] = React.useState(storeValue || '');
+  const [isFocused, setIsFocused] = React.useState(false);
+
+  const validateAndMaybeUpdate = (changeEvent) => {
+    const value = changeEvent.target.value;
+    if (isInputValid(value)) {
+      setTextValue(value);
+      onChange(toCents(value));
     }
   };
 
@@ -33,13 +53,18 @@ export function CurrencyInput(props: CurrencyInputProps) {
         </select>
 
         <input
-          type="number"
+          type="text"
           placeholder="0"
-          value={value}
-          onChange={e => validateAndMaybeUpdate(e.target.value)}
+          value={isFocused ? textValue : fromCents(storeValue)}
+          onChange={e => validateAndMaybeUpdate(e)}
+          onFocus={() => {
+            setTextValue(fromCents(storeValue));
+            setIsFocused(true);
+          }}
+          onBlur={() => setIsFocused(false)}
         />
       </div>
-      <div>Balance: {balance}</div>
+      <div>Balance: {currencyFormatFunc(fromCents(balance))}</div>
     </div>
   );
 }

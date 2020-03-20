@@ -24,9 +24,9 @@ export const CURRENCIES = {
 
 export const INITIAL_STATE = {
   balances: {
-    [CURRENCY_IDS.EUR]: 30.00,
-    [CURRENCY_IDS.USD]: 30.00,
-    [CURRENCY_IDS.GBP]: 30.00,
+    [CURRENCY_IDS.EUR]: 3000,
+    [CURRENCY_IDS.USD]: 3000,
+    [CURRENCY_IDS.GBP]: 3000,
   },
   rates: {
     EURUSD: 1,
@@ -39,11 +39,11 @@ export const INITIAL_STATE = {
   exchange: {
     from: {
       currency: CURRENCY_IDS.EUR,
-      value: 0
+      value: null
     },
     to: {
       currency: CURRENCY_IDS.USD,
-      value: 0
+      value: null
     }
   }
 };

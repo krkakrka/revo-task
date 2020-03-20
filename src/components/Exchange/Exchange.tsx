@@ -51,7 +51,7 @@ function Exchange(props: ExchangeProps) {
         onCurrencyChange={onToCurrencyIdChange}
       />
       <button
-        disabled={balances[baseCurrency.id] < exchange.from.value && balances[baseCurrency.id] === 0}
+        disabled={balances[baseCurrency.id] < exchange.from.value || !exchange.from.value}
         onClick={onExchangeClick}
       >
         Exchange

@@ -16,7 +16,7 @@ export function ExchangeRate(props: ExchangeRateProps) {
 
   return (
     <div className={styles.container}>
-      {`${baseFormatFunc(1)} = ${targetFormatFunc(rate)}`}
+      {`${baseFormatFunc(1)} = ${targetFormatFunc(rate.toFixed(4))}`}
     </div>
   );
 }
