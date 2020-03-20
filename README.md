@@ -13,6 +13,7 @@
 - Prod build - currently only dev (includes redux dev tools, uses webpack dev defaults, etc).
 - Improve type system - partly skipped due to time constraints.
 - Add react-testing-library to better emulate the user.
+- Prettier currency selectors.
 
 ## Notes
 - When testing, change `TEN_SECONDS_IN_MS` constant in `exchangeRate.service.ts`.
