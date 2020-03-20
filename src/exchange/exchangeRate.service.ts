@@ -3,11 +3,11 @@ import { store } from '../store/store';
 const BASE_EUR_RATES_URL = 'https://api.exchangeratesapi.io/latest?base=EUR&symbols=USD,GBP';
 // todo fix
 const TEN_SECONDS_IN_MS = 10 * 10000000;
-let pollInterval;
+let pollInterval: number;
 
-// todo tests?
+// todo any
 // {"rates":{"USD":1.0934,"GBP":0.9219},"base":"EUR","date":"2020-03-18"}
-function formatRates(rawRates) {
+function formatRates(rawRates: any) {
   const EURUSD = rawRates.rates['USD'];
   const USDEUR = 1/EURUSD;
   const EURGBP = rawRates.rates['GBP'];
@@ -28,7 +28,7 @@ function formatRates(rawRates) {
 export async function getRates() {
   const response = await window.fetch(BASE_EUR_RATES_URL);
   if (response.status < 200 || response.status >= 400) {
-    throw new Error(`Exchange rate API error: ${response.status}`, response);
+    throw new Error(`Exchange rate API error: ${response.status}. Response: ${JSON.stringify(response)}`);
   }
   return response.json();
 }

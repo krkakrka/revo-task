@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { Currency } from '../../exchange/currency.types';
 import { getFormatFunc } from '../../exchange/currency.utils';
 import styles from './CurrencyInput.css';
@@ -26,7 +26,8 @@ export interface CurrencyInputProps {
   currency: Currency,
   balance: number,
   value: number,
-  onChange: Function
+  onChange: Function,
+  onCurrencyChange: Function
 }
 
 export function CurrencyInput(props: CurrencyInputProps) {
@@ -35,8 +36,8 @@ export function CurrencyInput(props: CurrencyInputProps) {
   const [textValue, setTextValue] = React.useState(storeValue || '');
   const [isFocused, setIsFocused] = React.useState(false);
 
-  const validateAndMaybeUpdate = (changeEvent) => {
-    const value = changeEvent.target.value;
+  const validateAndMaybeUpdate = (changeEvent: ChangeEvent) => {
+    const value = (changeEvent.target as HTMLInputElement).value;
     if (isInputValid(value)) {
       setTextValue(value);
       onChange(toCents(value));

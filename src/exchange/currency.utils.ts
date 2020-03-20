@@ -8,15 +8,15 @@ const CURRENCY_TO_FORMAT = {
   default: formatEur
 };
 
-export function formatEur(value: number): string {
+export function formatEur(value: number|string): string {
   return `${value}€`;
 }
 
-export function formatUsd(value: number): string {
+export function formatUsd(value: number|string): string {
   return `${value}$`;
 }
 
-export function formatGbp(value: number): string {
+export function formatGbp(value: number|string): string {
   return `£${value}`;
 }
 

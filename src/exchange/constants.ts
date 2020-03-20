@@ -39,11 +39,11 @@ export const INITIAL_STATE = {
   exchange: {
     from: {
       currency: CURRENCY_IDS.EUR,
-      value: null
+      value: 0
     },
     to: {
       currency: CURRENCY_IDS.USD,
-      value: null
+      value: 0
     }
   }
 };

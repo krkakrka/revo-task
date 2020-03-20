@@ -4,13 +4,24 @@ import { CurrencyInput, ExchangeRate } from '..';
 import { Currency } from '../../exchange/currency.types';
 import { CURRENCIES, CURRENCY_IDS } from '../../exchange/constants';
 
+function canExchange(
+  baseCurrency: Currency,
+  balance: number,
+  exchange: { from: Currency, to: Currency }
+): boolean {
+  return balance < (exchange.from.value || 0) || !exchange.from.value;
+}
+
 export interface ExchangeProps {
   // todo any
   exchange: any,
   balances: any,
   rates: any,
-  onFromCurrencyChange: any,
-  onToCurrencyChange: any
+  onFromCurrencyValueChange: Function,
+  onToCurrencyValueChange: Function,
+  onExchangeClick: any,
+  onFromCurrencyIdChange: Function,
+  onToCurrencyIdChange: Function
 }
 
 function Exchange(props: ExchangeProps) {
@@ -34,7 +45,7 @@ function Exchange(props: ExchangeProps) {
       <CurrencyInput
         currency={baseCurrency}
         balance={balances[baseCurrency.id]}
-        value={exchange.from.value}
+        value={exchange.from.value || 0}
         onChange={onFromCurrencyValueChange}
         onCurrencyChange={onFromCurrencyIdChange}
       />
@@ -46,12 +57,12 @@ function Exchange(props: ExchangeProps) {
       <CurrencyInput
         currency={targetCurrency}
         balance={balances[targetCurrency.id]}
-        value={exchange.to.value}
+        value={exchange.to.value || 0}
         onChange={onToCurrencyValueChange}
         onCurrencyChange={onToCurrencyIdChange}
       />
       <button
-        disabled={balances[baseCurrency.id] < exchange.from.value || !exchange.from.value}
+        disabled={!canExchange(baseCurrency, balances[baseCurrency.id], exchange)}
         onClick={onExchangeClick}
       >
         Exchange
@@ -72,7 +83,6 @@ function mapStateToProps(state: any) {
 // todo any
 function mapDispatchToProps(dispatch: any) {
   return {
-    // todo consts/types, action creators
     onFromCurrencyValueChange: (value: number) => dispatch({ type: 'FROM_CURRENCY_VALUE_CHANGE', payload: { value } }),
     onToCurrencyValueChange: (value: number) => dispatch({ type: 'TO_CURRENCY_VALUE_CHANGE', payload: { value } }),
     onExchangeClick: () => dispatch({ type: 'EXCHANGE' }),
