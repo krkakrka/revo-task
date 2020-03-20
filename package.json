@@ -11,7 +11,7 @@
     "type-check": "tsc",
     "type-check:watch": "yarn run type-check -- --watch",
     "dev": "concurrently \"yarn run serve\" \"yarn run type-check:watch\" \"yarn run test:watch\"",
-    "bundle": "webpack"
+    "bundle:dev": "yarn test && webpack"
   },
   "dependencies": {
     "react": "^16.13.0",
