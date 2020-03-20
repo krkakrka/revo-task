@@ -33,3 +33,7 @@
   display: flex;
   margin: 1em;
 }
+
+.separator, .exchangeButton {
+  margin: 2em;
+}
