@@ -1,5 +1,7 @@
 # Revolut exchange wdiget
 
+![Image of Yaktocat](https://github.com/krkakrka/revo-task/blob/master/images/screen.png)
+
 ## To dev build
 1. `git clone`
 2. `yarn install`
