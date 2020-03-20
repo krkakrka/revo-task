@@ -9,11 +9,19 @@
 
 .exchangeButton {
   border: none;
-  background: pink;
+  background: #ff3f61;
   border-radius: 2em;
   padding: 20px 40px;
   font-weight: bold;
   color: white;
+  cursor: pointer;
+}
+.exchangeButton:hover{
+  background: #c71534;
+}
+.exchangeButton:disabled {
+  background: pink;
+  cursor: initial;
 }
 
 .separator {

@@ -5,12 +5,12 @@ import { Currency } from '../../exchange/currency.types';
 import { CURRENCIES, CURRENCY_IDS } from '../../exchange/constants';
 import styles from './Exchange.css';
 
-function canExchange(
+function canNotExchange(
   baseCurrency: Currency,
   balance: number,
   exchange: { from: Currency, to: Currency }
 ): boolean {
-  return balance < (exchange.from.value || 0) || !exchange.from.value;
+  return !exchange.from.value || balance < (exchange.from.value || 0);
 }
 
 export interface ExchangeProps {
@@ -66,7 +66,7 @@ function Exchange(props: ExchangeProps) {
       />
       <button
         className={styles.exchangeButton}
-        disabled={!canExchange(baseCurrency, balances[baseCurrency.id], exchange)}
+        disabled={canNotExchange(baseCurrency, balances[baseCurrency.id], exchange)}
         onClick={onExchangeClick}
       >
         Exchange
