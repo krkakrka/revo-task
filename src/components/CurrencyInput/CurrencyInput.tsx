@@ -46,14 +46,19 @@ export function CurrencyInput(props: CurrencyInputProps) {
 
   return (
     <div className={styles.container}>
-      <div>
-        <select value={currency.id} onChange={e => onCurrencyChange(e.target.value)}>
+      <div className={styles.currencyAndInput}>
+        <select
+          className={styles.select}
+          value={currency.id}
+          onChange={e => onCurrencyChange(e.target.value)}
+        >
           <option value="EUR">EUR</option>
           <option value="USD">USD</option>
           <option value="GBP">GBP</option>
         </select>
 
         <input
+          className={styles.currencyInput}
           type="text"
           placeholder="0"
           value={isFocused ? textValue : fromCents(storeValue)}
@@ -65,7 +70,7 @@ export function CurrencyInput(props: CurrencyInputProps) {
           onBlur={() => setIsFocused(false)}
         />
       </div>
-      <div>Balance: {currencyFormatFunc(fromCents(balance))}</div>
+      <div className={styles.balance}>Balance: {currencyFormatFunc(fromCents(balance))}</div>
     </div>
   );
 }

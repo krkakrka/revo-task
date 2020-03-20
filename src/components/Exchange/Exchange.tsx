@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { CurrencyInput, ExchangeRate } from '..';
 import { Currency } from '../../exchange/currency.types';
 import { CURRENCIES, CURRENCY_IDS } from '../../exchange/constants';
+import styles from './Exchange.css';
 
 function canExchange(
   baseCurrency: Currency,
@@ -41,7 +42,7 @@ function Exchange(props: ExchangeProps) {
   const rate = rates[pair];
 
   return (
-    <div>
+    <div className={styles.container}>
       <CurrencyInput
         currency={baseCurrency}
         balance={balances[baseCurrency.id]}
@@ -49,11 +50,13 @@ function Exchange(props: ExchangeProps) {
         onChange={onFromCurrencyValueChange}
         onCurrencyChange={onFromCurrencyIdChange}
       />
-      <ExchangeRate
-        base={baseCurrency}
-        target={targetCurrency}
-        rate={rate}
-      />
+      <div className={styles.separator}>
+        <ExchangeRate
+          base={baseCurrency}
+          target={targetCurrency}
+          rate={rate}
+        />
+      </div>
       <CurrencyInput
         currency={targetCurrency}
         balance={balances[targetCurrency.id]}
@@ -62,11 +65,12 @@ function Exchange(props: ExchangeProps) {
         onCurrencyChange={onToCurrencyIdChange}
       />
       <button
+        className={styles.exchangeButton}
         disabled={!canExchange(baseCurrency, balances[baseCurrency.id], exchange)}
         onClick={onExchangeClick}
       >
         Exchange
-        </button>
+      </button>
     </div>
   );
 };
